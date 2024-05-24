@@ -53,9 +53,11 @@ namespace component_composition.Controllers
                 User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                 if (user == null)
                 {
-                    
-                    db.Users.Add(new User { Email = model.Email, Password = model.Password, Name = model.Name, Surname = model.Surname });
+
+                    db.Users.Add(new User { Email = model.Email, Password = model.Password, Name = model.Name, Surname = model.Surname, RoleID = 0, AggregateID = 0, StatusID = 1 });
                     await db.SaveChangesAsync();
+
+                    //Add register history
 
                     await Authenticate(model.Email); 
 
@@ -69,7 +71,7 @@ namespace component_composition.Controllers
 
         private async Task Authenticate(string userName)
         {
-                var claims = new List<Claim>
+            var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
             };

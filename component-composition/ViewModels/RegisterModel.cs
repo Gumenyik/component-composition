@@ -7,10 +7,10 @@ namespace component_composition.ViewModels
         [Required(ErrorMessage = "Не вказаний Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Не вказане пріщвище")]
+        [Required(ErrorMessage = "Не вказане прізвище")]
         public string Surname { get; set; }
 
-        [Required(ErrorMessage = "Не вказане імя")]
+        [Required(ErrorMessage = "Не вказане ім'я")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Не вкзаний пароль")]
@@ -20,5 +20,6 @@ namespace component_composition.ViewModels
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Пароль не вірний")]
         public string ConfirmPassword { get; set; }
+
     }
 }

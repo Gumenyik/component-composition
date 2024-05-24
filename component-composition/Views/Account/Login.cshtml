@@ -1,7 +1,7 @@
 ﻿@model component_composition.ViewModels.LoginModel
 
 <h2>Вхід</h2>
-<a asp-action="Register" asp-controller="Account">Регістрація</a>
+<a asp-action="Register" asp-controller="Account">Реєстрація</a>
 
 <form asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
     <form asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
@@ -13,7 +13,7 @@
                 <span asp-validation-for="Email" />
             </div>
             <div class="form-group">
-                <label asp-for="Password">Password</label><br />
+                <label asp-for="Password">Пароль</label><br />
                 <input asp-for="Password" />
                 <span asp-validation-for="Password" />
             </div><br />

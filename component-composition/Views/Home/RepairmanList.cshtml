@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Список ремонтників";
+}
+
+@model component_composition.ViewModels.RepairmanTaskViewModel
+
+<h2 class="table-title">@ViewData["Title"]</h2>
+<table class="table">
+    <thead class="table-head">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Aggregate)
+            </th>
+        </tr>
+        </tr>
+    </thead>
+    <tbody class="table-body">
+        @foreach (var item in Model.Users)
+        {
+            if (item != null)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserID)
+                    </td>
+                   
+                    <td>
+                        <a href="/Home/Profile/@item.UserID">
+                                @Html.DisplayFor(modelItem => item.Surname) @Html.DisplayFor(modelItem => item.Name)
+                        </a>
+                    </td>
+                  
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status.Name)
+                    </td>
+                    <td>
+                        @{
+                            if (item.AggregateID != 0)
+                            {
+                                <a asp-asp-controller="Home" asp-action="AgragateProfile">
+                                    @Html.DisplayFor(modelItem => item.Aggregate.Name)
+                                </a>
+                            }
+                            else
+                            {
+                                <form asp-action="GiveTask" method="post">
+                                    <input type="hidden" name="UserID" value="@item.UserID" />
+                                    <select name="AggregateID" asp-items="@(new SelectList(Model.Aggregates, "AggregateID", "Name"))">
+                                        <option value="">Виберіть агрегат</option>
+                                    </select>
+                                    <button type="submit">Призначити завдання</button>
+                                </form>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+

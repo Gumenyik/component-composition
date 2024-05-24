@@ -1,0 +1,27 @@
+﻿@model component_composition.ViewModels.UserProfileViewModel
+<div>
+    <h3>Профіль користувача</h3>
+    <p><strong>Name:</strong> @Model.User.Name</p>
+    <p><strong>Surname:</strong> @Model.User.Surname</p>
+    <p><strong>Email:</strong> @Model.User.Email</p>
+    <p><strong>Status:</strong> @Model.User.Status.Name</p>
+</div>
+
+<h3>Історія користувача</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>Action Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var history in Model.UserHistories)
+        {
+            <tr>
+                <td>@history.Action</td>
+                <td>@history.ActionDate</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,10 +1,17 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    font-size: 120%;
 }
 
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -12,11 +19,26 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+h2 {
+    text-align: center;
+    padding: 20px 0;
 }
 
-body {
-  margin-bottom: 60px;
+table caption {
+    padding: .5em 0;
+}
+
+table.dataTable th,
+table.dataTable td {
+    white-space: nowrap;
+}
+
+table, th, td {
+    border: 1px solid;
+}
+
+.p {
+    text-align: center;
+    padding-top: 140px;
+    font-size: 14px;
 }

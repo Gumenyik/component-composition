@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace component_composition.Models
 {
-    [Table("State")]
-    public class State
+    [Table("Status")]
+    public class Status
     {
         [Key]
-        public int StateID { get; set; }
+        public int StatusID { get; set; }
         [Required]
         public string Name { get; set; }
     }

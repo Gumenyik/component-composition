@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 using component_composition.Models;
+using component_composition.Services;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace component_composition
 {
@@ -25,6 +25,7 @@ namespace component_composition
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<CatalogContext>(options => options.UseSqlServer(connection));
+            services.AddScoped<UserHistoryService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => 
@@ -40,8 +41,7 @@ namespace component_composition
                 options.Cookie.IsEssential = true;
             });
         }
-
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
             app.UseDeveloperExceptionPage();
 
@@ -50,7 +50,8 @@ namespace component_composition
             app.UseRouting();
 
             app.UseAuthentication();    
-            app.UseAuthorization();     
+            app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -58,6 +59,9 @@ namespace component_composition
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            
         }
+
+
     }
 }
